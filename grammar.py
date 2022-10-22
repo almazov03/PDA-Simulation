@@ -1,10 +1,13 @@
-from typing import List, Set, Union
+from typing import List, Union
 from dataclasses import dataclass
 
 
 @dataclass
 class Terminal:
     value: str
+
+    def print(self):
+        return f'`{self.value}`'
 
     def __str__(self):
         return f'"{self.value}"'
@@ -14,12 +17,19 @@ class Terminal:
 class NonTerminal:
     value: str
 
+    def print(self):
+        return f'[{self.value}]'
+
     def __str__(self):
         return f'${self.value}$'
 
 
 @dataclass
 class Empty:
+
+    def print(self):
+        return 'EPS'
+
     def __str__(self):
         return 'EPS'
 
@@ -31,6 +41,12 @@ Term = Union[Terminal, NonTerminal, Empty]
 class Rule:
     name: NonTerminal
     values: List[Term]
+
+    def print(self):
+        result = f'{self.name.print()} ='
+        for term in self.values:
+            result += ' ' + term.print()
+        return result + ";\n"
 
     def __str__(self):
         result = f'{str(self.name)} = {{ '
@@ -45,6 +61,12 @@ class Grammar:
     non_terminals: List[NonTerminal]
     start: NonTerminal
     rules: List[Rule]
+
+    def print(self):
+        result = f"start={self.start.print()}\n"
+        for rule in self.rules:
+            result += rule.print()
+        return result
 
     def __str__(self):
         result = f"STARTING_NON_TERMINAL={str(self.start)}\n"

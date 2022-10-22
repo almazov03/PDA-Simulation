@@ -60,19 +60,19 @@ parser = yacc.yacc()
 
 
 def main():
-    if len(sys.argv) != 2:
-        print(f"Error. Expected 1, received {len(sys.argv) - 1}")
+    if len(sys.argv) != 3:
+        print(f"Error. Expected 2, received {len(sys.argv) - 1}")
         exit(1)
 
-    file_name = sys.argv[1]
-    sys.stdout = open(file_name + '.parser.out', 'w')
+    input_file, output_file = sys.argv[1], sys.argv[2]
 
-    with open(file_name, 'r') as cin:
+    with open(input_file, 'r') as cin, open(output_file, "w") as cout, open(input_file + '.parser.out', "w") as cerr:
         grammar = parser.parse(' '.join(cin.readlines()))
 
         make_GNF(grammar)
 
-        print(grammar)
+        print(grammar.print(), file=cout)
+        print(grammar, file=cerr)
 
 
 if __name__ == "__main__":
