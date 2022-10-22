@@ -1,0 +1,6 @@
+STARTING_NON_TERMINAL=$S$
+$S$ = { "a" $S$ }
+$S$ = { "b" $S$ }
+$S$ = { "c" "d" "c" $S$ }
+$S$ = { EPS }
+
