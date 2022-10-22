@@ -1,0 +1,13 @@
+STARTING_NON_TERMINAL=$START$
+$START$ = { EPS }
+$S$ = { "1" }
+$S$ = { "1" $S$ }
+$T$ = { "0" }
+$T$ = { "0" $T$ }
+$START$ = { "1" }
+$START$ = { "1" $S$ }
+$START$ = { "0" }
+$START$ = { "0" $T$ }
+$S$ = { "0" }
+$S$ = { "0" $T$ }
+

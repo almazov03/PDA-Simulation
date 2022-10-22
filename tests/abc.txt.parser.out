@@ -1,6 +1,21 @@
-STARTING_NON_TERMINAL=$S$
-$S$ = { "a" $S$ }
-$S$ = { "b" $S$ }
-$S$ = { "c" "d" "c" $S$ }
-$S$ = { EPS }
+STARTING_NON_TERMINAL=$START$
+$START$ = { EPS }
+$S$ = { "a" }
+$S$ = { "b" }
+$S$ = { "c" }
+$S$ = { "a" $S'$ }
+$S$ = { "b" $S'$ }
+$S$ = { "c" $S'$ }
+$S'$ = { "a" $S'$ }
+$S'$ = { "a" }
+$S'$ = { "b" $S'$ }
+$S'$ = { "b" }
+$S'$ = { "c" $S'$ }
+$S'$ = { "c" }
+$START$ = { "a" }
+$START$ = { "b" }
+$START$ = { "c" }
+$START$ = { "a" $S'$ }
+$START$ = { "b" $S'$ }
+$START$ = { "c" $S'$ }
 

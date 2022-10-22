@@ -1,0 +1,7 @@
+STARTING_NON_TERMINAL=$S$
+$S$ = {$X$ $A$}
+$S$ = {$B$ $B$}
+$B$ = {"b"}
+$B$ = { $S$ $B$ }
+$X$ = { "b" }
+$A$ = { "a" }

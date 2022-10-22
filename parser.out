@@ -1,0 +1,190 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> Start
+Rule 1     Start -> START Rules
+Rule 2     Rules -> Rule
+Rule 3     Rules -> Rule Rules
+Rule 4     Rule -> NON_TERMINAL EQUAL LBR Expr RBR
+Rule 5     Expr -> Term
+Rule 6     Expr -> Term Expr
+Rule 7     Term -> TERMINAL
+Rule 8     Term -> NON_TERMINAL
+Rule 9     Term -> EMPTY
+
+Terminals, with rules where they appear
+
+EMPTY                : 9
+EQUAL                : 4
+LBR                  : 4
+NON_TERMINAL         : 4 8
+RBR                  : 4
+START                : 1
+TERMINAL             : 7
+error                : 
+
+Nonterminals, with rules where they appear
+
+Expr                 : 4 6
+Rule                 : 2 3
+Rules                : 1 3
+Start                : 0
+Term                 : 5 6
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . Start
+    (1) Start -> . START Rules
+
+    START           shift and go to state 2
+
+    Start                          shift and go to state 1
+
+state 1
+
+    (0) S' -> Start .
+
+
+
+state 2
+
+    (1) Start -> START . Rules
+    (2) Rules -> . Rule
+    (3) Rules -> . Rule Rules
+    (4) Rule -> . NON_TERMINAL EQUAL LBR Expr RBR
+
+    NON_TERMINAL    shift and go to state 5
+
+    Rules                          shift and go to state 3
+    Rule                           shift and go to state 4
+
+state 3
+
+    (1) Start -> START Rules .
+
+    $end            reduce using rule 1 (Start -> START Rules .)
+
+
+state 4
+
+    (2) Rules -> Rule .
+    (3) Rules -> Rule . Rules
+    (2) Rules -> . Rule
+    (3) Rules -> . Rule Rules
+    (4) Rule -> . NON_TERMINAL EQUAL LBR Expr RBR
+
+    $end            reduce using rule 2 (Rules -> Rule .)
+    NON_TERMINAL    shift and go to state 5
+
+    Rule                           shift and go to state 4
+    Rules                          shift and go to state 6
+
+state 5
+
+    (4) Rule -> NON_TERMINAL . EQUAL LBR Expr RBR
+
+    EQUAL           shift and go to state 7
+
+
+state 6
+
+    (3) Rules -> Rule Rules .
+
+    $end            reduce using rule 3 (Rules -> Rule Rules .)
+
+
+state 7
+
+    (4) Rule -> NON_TERMINAL EQUAL . LBR Expr RBR
+
+    LBR             shift and go to state 8
+
+
+state 8
+
+    (4) Rule -> NON_TERMINAL EQUAL LBR . Expr RBR
+    (5) Expr -> . Term
+    (6) Expr -> . Term Expr
+    (7) Term -> . TERMINAL
+    (8) Term -> . NON_TERMINAL
+    (9) Term -> . EMPTY
+
+    TERMINAL        shift and go to state 12
+    NON_TERMINAL    shift and go to state 9
+    EMPTY           shift and go to state 13
+
+    Expr                           shift and go to state 10
+    Term                           shift and go to state 11
+
+state 9
+
+    (8) Term -> NON_TERMINAL .
+
+    TERMINAL        reduce using rule 8 (Term -> NON_TERMINAL .)
+    NON_TERMINAL    reduce using rule 8 (Term -> NON_TERMINAL .)
+    EMPTY           reduce using rule 8 (Term -> NON_TERMINAL .)
+    RBR             reduce using rule 8 (Term -> NON_TERMINAL .)
+
+
+state 10
+
+    (4) Rule -> NON_TERMINAL EQUAL LBR Expr . RBR
+
+    RBR             shift and go to state 14
+
+
+state 11
+
+    (5) Expr -> Term .
+    (6) Expr -> Term . Expr
+    (5) Expr -> . Term
+    (6) Expr -> . Term Expr
+    (7) Term -> . TERMINAL
+    (8) Term -> . NON_TERMINAL
+    (9) Term -> . EMPTY
+
+    RBR             reduce using rule 5 (Expr -> Term .)
+    TERMINAL        shift and go to state 12
+    NON_TERMINAL    shift and go to state 9
+    EMPTY           shift and go to state 13
+
+    Term                           shift and go to state 11
+    Expr                           shift and go to state 15
+
+state 12
+
+    (7) Term -> TERMINAL .
+
+    TERMINAL        reduce using rule 7 (Term -> TERMINAL .)
+    NON_TERMINAL    reduce using rule 7 (Term -> TERMINAL .)
+    EMPTY           reduce using rule 7 (Term -> TERMINAL .)
+    RBR             reduce using rule 7 (Term -> TERMINAL .)
+
+
+state 13
+
+    (9) Term -> EMPTY .
+
+    TERMINAL        reduce using rule 9 (Term -> EMPTY .)
+    NON_TERMINAL    reduce using rule 9 (Term -> EMPTY .)
+    EMPTY           reduce using rule 9 (Term -> EMPTY .)
+    RBR             reduce using rule 9 (Term -> EMPTY .)
+
+
+state 14
+
+    (4) Rule -> NON_TERMINAL EQUAL LBR Expr RBR .
+
+    NON_TERMINAL    reduce using rule 4 (Rule -> NON_TERMINAL EQUAL LBR Expr RBR .)
+    $end            reduce using rule 4 (Rule -> NON_TERMINAL EQUAL LBR Expr RBR .)
+
+
+state 15
+
+    (6) Expr -> Term Expr .
+
+    RBR             reduce using rule 6 (Expr -> Term Expr .)
+
