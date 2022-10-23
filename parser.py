@@ -66,13 +66,12 @@ def main():
 
     input_file, output_file = sys.argv[1], sys.argv[2]
 
-    with open(input_file, 'r') as cin, open(output_file, "w") as cout, open(input_file + '.parser.out', "w") as cerr:
+    with open(input_file, 'r') as cin, open(output_file, "w") as cout:
         grammar = parser.parse(' '.join(cin.readlines()))
 
         make_GNF(grammar)
 
-        print(grammar.print(), file=cout)
-        print(grammar, file=cerr)
+        print(grammar, file=cout)
 
 
 if __name__ == "__main__":

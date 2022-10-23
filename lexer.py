@@ -31,7 +31,7 @@ def t_TERMINAL(t):
 
 
 def t_NON_TERMINAL(t):
-    r'\$[^\$]\$'
+    r'\$[^\$]+\$'
     t.value = t.value[1:-1]
     return t
 
