@@ -136,6 +136,22 @@ def remove_left_recursion(grammar):
             break
 
 
+def remove_all_terminal_in_right_part(grammar):
+    n = len(grammar.rules)
+    for j in range(n):
+        rule = grammar.rules[j]
+        new_rule = [rule.values[0]]
+        for i in range(1, len(rule.values)):
+            term = rule.values[i]
+            if isinstance(term, Terminal):
+                new_non_term = NonTerminal(str(term)[1:-1] + "'")
+                grammar.rules += [Rule(new_non_term, [term])]
+                new_rule += [new_non_term]
+            else:
+                new_rule += [term]
+        grammar.rules[j] = Rule(rule.name, new_rule)
+
+
 def make_GNF(grammar: Grammar):
     remove_eps_rules(grammar)
     remove_left_recursion(grammar)
@@ -168,3 +184,5 @@ def make_GNF(grammar: Grammar):
 
                     for rule2 in rules_j:
                         grammar.rules += [Rule(grammar.non_terminals[i], rule2 + ost)]
+    remove_all_terminal_in_right_part(grammar)
+    make_unique_rules(grammar)
